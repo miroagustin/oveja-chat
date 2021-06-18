@@ -18,7 +18,6 @@ public class SocketWriter {
 
 	public void write(String text) {
 		try {
-			System.out.println("Le mando al server");
 			if(text != "") {
 				outStream.writeUTF(text);
 				outStream.flush();

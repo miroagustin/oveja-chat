@@ -26,11 +26,8 @@ public class SocketReader extends SwingWorker<Void, String> {
 
     @Override
     protected Void doInBackground() throws Exception {
-        System.out.println("Connected to Server!");
 
         try (DataInputStream in = new DataInputStream(SocketManager.getInstance().getInputStream())) {
-
-            System.out.println("Before setting text area");
 
             String serverInput = null;
             do {
