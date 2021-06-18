@@ -6,19 +6,21 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Set;
 
-public class ClientThread extends Thread {
-	private Socket s;
+import Chat.Conexion;
+
+public class ClientThread extends ThreadNotificador {
+	private Conexion conexion;
 	private Set<DataOutputStream> clientes;
 	DataInputStream inputStream;
 
-	public ClientThread(Socket s, Set<DataOutputStream> listaClientes) {
-		this.s = s;
+	public ClientThread(Conexion conexion, Set<DataOutputStream> listaClientes) {
+		this.conexion = conexion;
 		this.clientes = listaClientes;
 	}
-
-	public void run() {
+	@Override
+	public void doRun() {
 		try {
-			inputStream = new DataInputStream(s.getInputStream());
+			inputStream = conexion.getInput();
 			while (true) {
 				String str = (String) inputStream.readUTF();
 				for (DataOutputStream outCliente : clientes) {
@@ -30,6 +32,8 @@ public class ClientThread extends Thread {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-
+	}
+	public Conexion getConexion() {
+		return conexion;
 	}
 }

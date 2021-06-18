@@ -90,10 +90,10 @@ public class ClienteUI extends JFrame {
 
 
     private void txtInputActionPerformed(java.awt.event.ActionEvent evt) {
-        if (SocketManager.getInstance().isOpen()) {
+        if (SocketManager.getInstance().isOpen() && !txtInput.getText().isEmpty()) {
             socketWriter.write(nombreUsuario + ": " + txtInput.getText());
         } else {
-            System.out.println("!! Not open");
+        	System.out.println("El socket esta abierto? "+ SocketManager.getInstance().isOpen());
         }
         txtInput.setText("");
     }
